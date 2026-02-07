@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 20% 96%;
+    --foreground: 220 25% 12%;
+
+    --card: 40 30% 94%;
+    --card-foreground: 220 25% 12%;
+
+    --popover: 40 30% 94%;
+    --popover-foreground: 220 25% 12%;
+
+    --primary: 220 30% 18%;
+    --primary-foreground: 40 20% 96%;
+
+    --secondary: 40 25% 90%;
+    --secondary-foreground: 220 25% 12%;
+
+    --muted: 40 15% 88%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 38 80% 55%;
+    --accent-foreground: 220 30% 12%;
+
+    --destructive: 0 60% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 18% 82%;
+    --input: 40 18% 82%;
+    --ring: 38 80% 55%;
+
+    --radius: 0.625rem;
+
+    /* Custom courtroom tokens */
+    --verdict-illegal: 0 65% 48%;
+    --verdict-legal: 145 40% 42%;
+    --verdict-reform: 38 75% 50%;
+    --gavel-gold: 38 80% 55%;
+    --evidence-bg: 40 35% 92%;
+    --parchment: 40 40% 95%;
+    --wood-dark: 25 35% 22%;
+    --wood-medium: 25 30% 35%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 25% 8%;
+    --foreground: 40 20% 92%;
+
+    --card: 220 20% 12%;
+    --card-foreground: 40 20% 92%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 40 20% 92%;
+
+    --primary: 38 80% 55%;
+    --primary-foreground: 220 25% 8%;
+
+    --secondary: 220 15% 18%;
+    --secondary-foreground: 40 20% 92%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 38 80% 55%;
+    --accent-foreground: 220 25% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 38 80% 55%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Evidence card flip animation */
+.evidence-card-inner {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.evidence-card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.evidence-card-front,
+.evidence-card-back {
+  backface-visibility: hidden;
+}
+
+.evidence-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Gavel strike animation */
+@keyframes gavel-strike {
+  0% { transform: rotate(-30deg); }
+  50% { transform: rotate(10deg); }
+  70% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-gavel {
+  animation: gavel-strike 0.6s ease-out;
+  transform-origin: bottom right;
+}
+
+/* Verdict stamp animation */
+@keyframes stamp {
+  0% { transform: scale(3) rotate(-15deg); opacity: 0; }
+  60% { transform: scale(0.95) rotate(-5deg); opacity: 1; }
+  80% { transform: scale(1.02) rotate(-4deg); }
+  100% { transform: scale(1) rotate(-3deg); opacity: 1; }
+}
+
+.animate-stamp {
+  animation: stamp 0.5s ease-out forwards;
+}
+
+/* Parchment texture overlay */
+.parchment-texture {
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, hsl(40 40% 95% / 0.8), transparent 70%),
+    radial-gradient(ellipse at 80% 50%, hsl(40 30% 90% / 0.6), transparent 70%);
+}
